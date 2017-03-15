@@ -2,24 +2,31 @@
 <html ng-app="triviaApp">
 
 <head>
-
+    <title>
+        Quiz Master
+    </title>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body ng-controller="triviaCtrl">
+    <section class="hero">
+        <a href="#play"> <button class='omdb btn-success play btn-xlarge' type='button' ng-click="grabJson()">LET'S PLAY</button></a>
 
+    </section>
     <div class="container">
         <div class="row">
-            <div class="col-md-4" id="left">
-                <div class="left side info">
-                    <div class="wrapper">
-                        <h3>Info</h3>
-                        <!-- <image ng-click="grabJson()" height="140px" width="140px" src="http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/black-paint-splatter-icons-alphanumeric/069159-black-paint-splatter-icon-alphanumeric-question-mark3.png"><br> -->
-                        <button class='omdb btn-primary' type='button' ng-click="grabJson()">Ask</button>
-                        <br>
-                        <span>User name</span><br>
-                        <span>Category</span><br>
+            <a name="play"></a>
+            <div class="col-md-4 centered" id="left">
+                <div>
+                    <div>
+                        <span>
+
+
+                        </span><br>
+                        <span>Hello</span><br>
+                        <span>Category: Science -> Computers</span><br>
                         <span>Question #</span><br>
                         <div class="score">
                             <span>Score: {{ myScore }}</span>
@@ -27,39 +34,65 @@
                     </div>
                 </div>
             </div>
-            
-                  <div class="col-md-8" id="right" ng-repeat="question in quests.data.results | limitTo:1">
-           <div class="questions" ng-controller="triviaCtrl" >
-               <h4>{{ question.question}} </h4>
-               <form>
-                 <fieldset id ="option">
-                   <input type="radio" name ="selection">{{ question.correct_answer}}<br>
-                   <input type="radio" name ="selection">{{ question.incorrect_answers[0] }}<br>
-                   <input type="radio" name ="selection">{{ question.incorrect_answers[1] }}<br>
-                   <input type="radio" name ="selection">{{question.incorrect_answers[2]}}<br>
-                 </fieldset>
+
+            <div class="col-md-8 centered" id="right" ng-repeat="question in quests.data.results | limitTo:1">
+                <div class="questions" ng-controller="triviaCtrl">
+                    {{ question.question}}
+                    <br><br>
+                    <form class='options'>
+                        <fieldset id="option">
+                            <input type="radio" name="selection"> {{ question.correct_answer}}<br>
+                            <input type="radio" name="selection"> {{ question.incorrect_answers[0] }}<br>
+                            <input type="radio" name="selection"> {{ question.incorrect_answers[1] }}<br>
+                            <input type="radio" name="selection"> {{question.incorrect_answers[2]}}<br>
+                        </fieldset>
                 </div>
 
-                        <br>
-                        <div class="submitAnswer">
-                            <span>
-                    <button class='omdb btn-primary' type='button' ng-click="answered()">Submit</button>
+                <br>
+                <div class="submitAnswer">
+                    <span>
+                    <button class='omdb btn-danger options' type='button' ng-click="answered()"> Submit </button>
                   </span>
-                        </div>
+                </div>
 
 
-                    </form>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <footer class="container-fluid bg-4 text-center footer">
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div class="container">
+            <div class="row">
+                <div name="footer" class='col-md-3'>
+                    <a href="https://www.linkedin.com/in/talpod/" target="_blank"><img class='thumbnail' title='Tal Podrazhansky' src='https://media.licdn.com/media/AAEAAQAAAAAAAAdvAAAAJDFkNDcyMmQ2LTI2NDktNDFkOS05MTkwLTcwYzBjYTUyYzA1NQ.jpg'></a>
+                </div>
+                <div name="footer" class='col-md-3'>
+
+                    <a href="https://www.linkedin.com/in/marina-shemesh-98133311/" target="_blank"><img class='thumbnail' title='Marina Shemesh' src='https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/1/000/088/1e6/2ce9ad6.jpg'></a>
+                </div>
+                <div name="footer" class='col-md-3'>
+
+                    <a href="https://www.linkedin.com/in/guy-oren-47662b114/" target="_blank"><img class='thumbnail' title='Guy Oren' src='https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAe3AAAAJDc5ZDk3OThkLThhOWYtNGEyZS05NDRhLTAxNzFiZjE3ZWMzNg.jpg'></a>
+                </div>
+                <div name="footer" class='col-md-3'>
+
+                    <a href="https://www.linkedin.com/in/yejiel-wahnich/" target="_blank"><img class='thumbnail' title='Yejiel Wahnich' src='https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAqlAAAAJGUyZWU1YTJiLTg0ODMtNDY1ZC1hNmI2LTE5NGQ4MTgwM2ZhYw.jpg'></a>
                 </div>
 
             </div>
         </div>
-    </div>
-{{ myQuestion }}
+        </div>
+
+        <p>Nothing to see. Go away - This is the fluid footer</p>
+        &copy;	Yejiel and Co
+    </footer>
+
     <script src="node_modules/angular/angular.min.js"></script>
-    
     <script src="ng-app.js"></script>
     <script src="ng-service.js"></script>
     <script src="triviaCtrl.js"></script>
 </body>
-
 </html>
