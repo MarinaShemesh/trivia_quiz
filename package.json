@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/only1guy/Trivia-Hack2/issues"
   },
-  "homepage": "https://github.com/only1guy/Trivia-Hack2#readme"
+  "homepage": "https://github.com/only1guy/Trivia-Hack2#readme",
+  "dependencies": {
+    "angular": "^1.6.3",
+    "bootstrap": "^3.3.7"
+  }
 }
