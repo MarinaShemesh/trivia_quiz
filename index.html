@@ -12,7 +12,7 @@
 
 <body ng-controller="triviaCtrl">
     <section class="hero">
-        <a href="#play"> <button class='omdb btn-success play btn-xlarge' type='button' ng-click="grabJson()">LET'S PLAY</button></a>
+        <a href="#play"> <button class='omdb btn-success play btn-xlarge' type='button' ng-click="triviaObj.getQuestions()">LET'S PLAY</button></a>
 
     </section>
     <div class="container">
@@ -25,43 +25,43 @@
 
 
                         </span><br>
-                        <span>Hello</span><br>
                         <span>Category: Science -> Computers</span><br>
-                        <span>Question #</span><br>
-                        <div class="score">
-                            <span>Score: {{ myScore }}</span>
+ <span>Question {{triviaObj.temp[0] + 1}}</span><br>
+                         <div class="score">
+                            <span>Score: {{ triviaObj.myScore[0]}}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-8 centered" id="right" ng-repeat="question in quests.data.results | limitTo:1">
-                <div class="questions" ng-controller="triviaCtrl">
-                    {{ question.question}}
-                    <br><br>
-                    <form class='options'>
-                        <fieldset id="option">
-                            <input type="radio" name="selection"> {{ question.correct_answer}}<br>
-                            <input type="radio" name="selection"> {{ question.incorrect_answers[0] }}<br>
-                            <input type="radio" name="selection"> {{ question.incorrect_answers[1] }}<br>
-                            <input type="radio" name="selection"> {{question.incorrect_answers[2]}}<br>
-                        </fieldset>
-                </div>
-
-                <br>
-                <div class="submitAnswer">
-                    <span>
-                    <button class='omdb btn-danger options' type='button' ng-click="answered()"> Submit </button>
-                  </span>
-                </div>
+            <div class="col-md-8 centered" id="right" >
 
 
-                </form>
+              <div class="questions">
+                  {{triviaObj.quests[0][triviaObj.temp].question}}
+                  <br><br>
+                       <form name="myForm" ng-submit="triviaObj.answered(radioValue)" class="options">
+                           <label><input type="radio" name="test" ng-model="radioValue" value="{{triviaObj.answers[0]}}"/>  {{triviaObj.answers[0]}}</label><br>
+                           <label><input type="radio" name="test" ng-model="radioValue" value="{{triviaObj.answers[1]}}"/>  {{triviaObj.answers[1]}}</label><br>
+                           <label><input type="radio" name="test" ng-model="radioValue" value="{{triviaObj.answers[2]}}"/>  {{triviaObj.answers[2]}}</label><br>
+                           <label><input type="radio" name="test" ng-model="radioValue" value="{{triviaObj.answers[3]}}"/>  {{triviaObj.answers[3]}}</label><br>
+                           <button type="submit" class='omdb btn-danger'> Next </button>
+                       </form>
+
+
             </div>
 
         </div>
     </div>
     </div>
+
+    <div class='container'>
+    <div id="summary1">Your score was shared on Facebook to warn the world.</div>
+    <div id="summary2">We cannot believe you completed the test with such a low IQ.</div>
+    <div id="summary3">Your teachers were right, you really can do better.</div>
+    <div id="summary4">Well done on wasting your time with this test. Shouldn't you be working?</div>
+    </div>
+
     <footer class="container-fluid bg-4 text-center footer">
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <div class="container">
@@ -86,7 +86,9 @@
         </div>
         </div>
 
-        <p>Nothing to see. Go away - This is the fluid footer</p>
+
+<br><br>
+        <p>Nothing to see. Go away - This is the footer</p>
         &copy;	Yejiel and Co
     </footer>
 
@@ -94,5 +96,6 @@
     <script src="ng-app.js"></script>
     <script src="ng-service.js"></script>
     <script src="triviaCtrl.js"></script>
+    <script src="triviaFactory.js"></script>
 </body>
 </html>
