@@ -27,23 +27,19 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8" id="right" ng-repeat="question in questions | limitTo:1">
-                <div class="questions" ng-controller="triviaCtrl">
-                  <div class="results">  </div>
+            
+                  <div class="col-md-8" id="right" ng-repeat="question in quests.data.results | limitTo:1">
+           <div class="questions" ng-controller="triviaCtrl" >
+               <h4>{{ question.question}} </h4>
+               <form>
+                 <fieldset id ="option">
+                   <input type="radio" name ="selection">{{ question.correct_answer}}<br>
+                   <input type="radio" name ="selection">{{ question.incorrect_answers[0] }}<br>
+                   <input type="radio" name ="selection">{{ question.incorrect_answers[1] }}<br>
+                   <input type="radio" name ="selection">{{question.incorrect_answers[2]}}<br>
+                 </fieldset>
                 </div>
-                <div class="answers">
 
-                    <form>
-                        <fieldset id="group1">
-                            <input type="radio" value="1" name="group1"> {{ question.correct_answer}}
-                            <br>
-                            <input type="radio" value="2" name="group1"> {{ question.incorrect_answers[0] }}
-                            <br>
-                            <input type="radio" value="3" name="group1"><div class='right'></div>
-                            <br>
-                            <input type="radio" value="4" name="group1"> {{ question.incorrect_answers[2] }}
-
-                        </fieldset>
                         <br>
                         <div class="submitAnswer">
                             <span>
@@ -60,7 +56,7 @@
     </div>
 {{ myQuestion }}
     <script src="node_modules/angular/angular.min.js"></script>
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    
     <script src="ng-app.js"></script>
     <script src="ng-service.js"></script>
     <script src="triviaCtrl.js"></script>
