@@ -12,7 +12,7 @@
 
 <body ng-controller="triviaCtrl">
     <section class="hero">
-        <a href="#play"> <button class='omdb btn-success play btn-xlarge' type='button' ng-click="grabJson()">LET'S PLAY</button></a>
+        <a href="#play"> <button class='omdb btn-success play btn-xlarge' type='button' ng-click="triviaObj.getQuestions()">LET'S PLAY</button></a>
 
     </section>
     <div class="container">
@@ -27,32 +27,33 @@
                         </span><br>
                         <span>Hello</span><br>
                         <span>Category: Science -> Computers</span><br>
-                        <span>Question #</span><br>
-                        <div class="score">
-                            <span>Score: {{ myScore }}</span>
+ <span>Question {{triviaObj.temp[0] + 1}}</span><br>
+                         <div class="score">
+                            <span>Score: {{ triviaObj.myScore }}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-8 centered" id="right" ng-repeat="question in quests.data.results | limitTo:1">
-                <div class="questions" ng-controller="triviaCtrl">
-                    {{ question.question}}
-                    <br><br>
-                    <form class='options'>
-                        <fieldset id="option">
-                            <input type="radio" name="selection"> {{ question.correct_answer}}<br>
-                            <input type="radio" name="selection"> {{ question.incorrect_answers[0] }}<br>
-                            <input type="radio" name="selection"> {{ question.incorrect_answers[1] }}<br>
-                            <input type="radio" name="selection"> {{question.incorrect_answers[2]}}<br>
-                        </fieldset>
-                </div>
+            <div class="col-md-8 centered" id="right" >
 
-                <br>
-                <div class="submitAnswer">
-                    <span>
-                    <button class='omdb btn-danger options' type='button' ng-click="answered()"> Submit </button>
-                  </span>
+               <div class="questions">
+                   {{triviaObj.quests[0][triviaObj.temp].question}}
+
+
+<br><br>
+                        <form>
+
+                             <fieldset id ="option" ng-repeat="ans in triviaObj.answers" class="options">
+
+                               <input type="radio" name ="selection">   {{ans}}<br>
+                             </fieldset>
+
+                                    <br>
+
+                    <button class='omdb btn-danger options' type='button' ng-click="triviaObj.answered()"> Next </button>
+
+  </span>
                 </div>
 
 
@@ -94,5 +95,6 @@
     <script src="ng-app.js"></script>
     <script src="ng-service.js"></script>
     <script src="triviaCtrl.js"></script>
+    <script src="triviaFactory.js"></script>
 </body>
 </html>
