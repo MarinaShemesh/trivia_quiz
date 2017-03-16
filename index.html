@@ -5,7 +5,7 @@
     <title>
         Quiz Master
     </title>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -18,52 +18,84 @@
     <div class="container">
         <div class="row">
             <a name="play"></a>
-            <div class="col-md-4 centered" id="left">
+            <div class="col-md-4 centered smallfont" id="left">
                 <div>
                     <div>
                         <span>
 
 
                         </span><br>
-                        <span>Category: Science -> Computers</span><br>
- <span>Question {{triviaObj.temp[0] + 1}}</span><br>
-                         <div class="score">
-                            <span>Score: {{ triviaObj.myScore[0]}}</span>
+                        <span>
+                        <image src='https://image-gr.s3.envato.com/files/220454745/preview.jpg' height=220px width=220px />
+                      </span><br><br>
+                        <span>   Scoreboard:</span><br>
+                        <span>   Question {{triviaObj.temp[0] + 1}}</span><br>
+                        <div class="score">
+                            <span>   Score: {{ triviaObj.myScore[0]}}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-8 centered" id="right" >
+            <div class="col-md-8 centered" id="right">
 
 
-              <div class="questions">
-                  {{triviaObj.quests[0][triviaObj.temp].question}}
-                  <br><br>
-                       <form name="myForm" ng-submit="triviaObj.answered(radioValue)" class="options">
-                           <label><input type="radio" name="test" ng-model="radioValue" value="{{triviaObj.answers[0]}}"/>  {{triviaObj.answers[0]}}</label><br>
-                           <label><input type="radio" name="test" ng-model="radioValue" value="{{triviaObj.answers[1]}}"/>  {{triviaObj.answers[1]}}</label><br>
-                           <label><input type="radio" name="test" ng-model="radioValue" value="{{triviaObj.answers[2]}}"/>  {{triviaObj.answers[2]}}</label><br>
-                           <label><input type="radio" name="test" ng-model="radioValue" value="{{triviaObj.answers[3]}}"/>  {{triviaObj.answers[3]}}</label><br>
-                           <button type="submit" class='omdb btn-danger'> Next </button>
-                       </form>
+                <div class="questions static">
+                    <br><br> {{triviaObj.quests[0][triviaObj.temp].question}}
+                    <br>
+                    <hr size="4">
 
+                    <form name="myForm" ng-submit="triviaObj.answered(radioValue)" class="options">
+                        <label><input type="radio" name="test" ng-model="radioValue" value="{{triviaObj.answers[0]}}"/>  {{triviaObj.answers[0]}}</label><br>
+                        <label><input type="radio" name="test" ng-model="radioValue" value="{{triviaObj.answers[1]}}"/>  {{triviaObj.answers[1]}}</label><br>
+                        <label><input type="radio" name="test" ng-model="radioValue" value="{{triviaObj.answers[2]}}"/>  {{triviaObj.answers[2]}}</label><br>
+                        <label><input type="radio" name="test" ng-model="radioValue" value="{{triviaObj.answers[3]}}"/>  {{triviaObj.answers[3]}}</label><br>
+                        <br>
+                        <div class='static'>
+                            <button type="submit" class='omdb btn-danger'> Next </button>
+                        </div>
+                    </form>
+
+
+                </div>
 
             </div>
-
         </div>
     </div>
-    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <div class='col-md-12 container jump' id="one">
+        <div id="summary1" ng-if="triviaObj.myScore[0] <= 3 && triviaObj.temp[0] == 9">
+            <p class='bigimg'>
+                <h1>
+                  Your score is {{ triviaObj.myScore[0]}} points.
+                  It was shared on Facebook to warn the world.</h1>
+                <br>
+                <img class='bigimg' src="http://aussiememes.com.au/media/created/Somewhere-a-village-acd8io.jpg" height="60%" width="60%">
+            </p>
+        </div>
 
-    <div class='container'>
-    <div id="summary1">Your score was shared on Facebook to warn the world.</div>
-    <div id="summary2">We cannot believe you completed the test with such a low IQ.</div>
-    <div id="summary3">Your teachers were right, you really can do better.</div>
-    <div id="summary4">Well done on wasting your time with this test. Shouldn't you be working?</div>
+        <div id="summary2" ng-if="triviaObj.myScore[0] >=4  && triviaObj.myScore[0] < 10 && triviaObj.temp[0] == 9">
+            <p class='bigimg'>
+                <h1>
+                  Your score is {{ triviaObj.myScore[0]}} points.
+                  Your teachers were right, you really can do better.</h1>
+                <br>
+                <img class='bigimg' src="https://i.imgflip.com/qx239.jpg" height="60%" width="60%">
+        </div>
+
+        <div id="summary3" ng-if="triviaObj.myScore[0] == 10 && triviaObj.temp[0] == 9">
+
+            <p align=center>
+                <h1>
+                  Your score is {{ triviaObj.myScore[0]}} points.
+                  Well done on wasting your time with this test. Shouldn't you be working?</h1> </p>
+            <br>
+            <img class='bigimg' src="http://s2.quickmeme.com/img/0f/0f142c584e177e3857a0cd3f8b1461da660e4ea563d67d2d7a7011928cabfacb.jpg" height="60%" width="60%">
+        </div>
     </div>
 
     <footer class="container-fluid bg-4 text-center footer">
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <div class="container">
             <div class="row">
                 <div name="footer" class='col-md-3'>
@@ -72,24 +104,25 @@
                 <div name="footer" class='col-md-3'>
 
                     <a href="https://www.linkedin.com/in/marina-shemesh-98133311/" target="_blank"><img class='thumbnail' title='Marina Shemesh' src='https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/1/000/088/1e6/2ce9ad6.jpg'></a>
+
+
                 </div>
                 <div name="footer" class='col-md-3'>
 
                     <a href="https://www.linkedin.com/in/guy-oren-47662b114/" target="_blank"><img class='thumbnail' title='Guy Oren' src='https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAe3AAAAJDc5ZDk3OThkLThhOWYtNGEyZS05NDRhLTAxNzFiZjE3ZWMzNg.jpg'></a>
+
+
                 </div>
                 <div name="footer" class='col-md-3'>
 
                     <a href="https://www.linkedin.com/in/yejiel-wahnich/" target="_blank"><img class='thumbnail' title='Yejiel Wahnich' src='https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAqlAAAAJGUyZWU1YTJiLTg0ODMtNDY1ZC1hNmI2LTE5NGQ4MTgwM2ZhYw.jpg'></a>
+
                 </div>
 
             </div>
         </div>
         </div>
 
-
-<br><br>
-        <p>Nothing to see. Go away - This is the footer</p>
-        &copy;	Yejiel and Co
     </footer>
 
     <script src="node_modules/angular/angular.min.js"></script>
@@ -98,4 +131,5 @@
     <script src="triviaCtrl.js"></script>
     <script src="triviaFactory.js"></script>
 </body>
+
 </html>

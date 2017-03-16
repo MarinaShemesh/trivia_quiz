@@ -1,6 +1,7 @@
 body {
 
 font-family: 'Roboto', serif;
+font-weight: 100;
 font-size: 28px;
 }
 .options {
@@ -44,4 +45,21 @@ font-size: 28px;
   height: 150px;
   width: 150px;
 
+}
+.jump {
+    height: 1500px;
+}
+.static {
+  width: 880px;
+}
+.smallfont {
+
+font-size: 20px;
+}
+.bigimg {
+  margin: auto;
+  display: block;
+}
+h1 {
+  text-align: center;
 }
