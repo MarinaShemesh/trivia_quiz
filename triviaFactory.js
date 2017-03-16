@@ -1,10 +1,12 @@
 app.factory('triviaFactory', function($http, $timeout) {
+	var wrong = new Audio('http://www.freesound.org/data/previews/331/331912_3248244-lq.mp3');
+
 	var myScore = [0];
     var temp = [0];
     var quests=[];
     var answers = [];
     var grabJson = function() {
-        $http.get('https://opentdb.com/api.php?amount=20&category=18&difficulty=easy&type=multiple')
+        $http.get('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple')
             .then(function(response) {
                 quests.push(response.data.results);
                 answers.push(quests[0][temp].correct_answer);
@@ -23,13 +25,17 @@ app.factory('triviaFactory', function($http, $timeout) {
         grabJson();
     }
 
-
+		function jump(h){
+		    var top = document.getElementById(h).offsetTop;
+		    window.scrollTo(0, top);
+		}
 
     var answered = function (slct) {
         if (slct == [quests[0][temp].correct_answer]){
             myScore[0]++
         } else {
-            alert("wrong")
+            console.log("wrong");
+						wrong.play();
         }
         console.log(myScore)
 
@@ -50,7 +56,9 @@ app.factory('triviaFactory', function($http, $timeout) {
                 // else
                 //      alert(Dead Wrong!!!!)
             }else {
-                alert("That was the last question!")
+                console.log("That was the last question!");
+								jump('one');
+
             }
         }
 
