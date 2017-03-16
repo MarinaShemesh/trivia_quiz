@@ -1,10 +1,11 @@
 app.factory('triviaFactory', function($http, $timeout) {
-	var wrong = new Audio('http://www.freesound.org/data/previews/331/331912_3248244-lq.mp3');
 
 	var myScore = [0];
     var temp = [0];
     var quests=[];
     var answers = [];
+    var wrong = new Audio('http://www.freesound.org/data/previews/331/331912_3248244-lq.mp3');
+
     var grabJson = function() {
         $http.get('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple')
             .then(function(response) {
@@ -13,8 +14,7 @@ app.factory('triviaFactory', function($http, $timeout) {
                 for (var i = 0; i < quests[0][temp].incorrect_answers.length; i++) {
                 	answers.push(quests[0][temp].incorrect_answers[i]);
                 };
-                console.log(quests[0][temp].question);
-                console.log(answers);
+                answers.sort(function(a, b){return 0.5 - Math.random()});
             }, function (err) {
                    console.error(err)
                 });
@@ -23,48 +23,48 @@ app.factory('triviaFactory', function($http, $timeout) {
     var getQuestions = function () {
     	answers.length = 0;
         grabJson();
-    }
+    };
 
-		function jump(h){
-		    var top = document.getElementById(h).offsetTop;
-		    window.scrollTo(0, top);
-		}
+    var getQuestions2 = function () {
+        answers.length = 0;
+        myScore[0] = 0;
+        temp[0]=0;
+        grabJson();
+    };
+
+    var jump = function (h){
+	    var top = document.getElementById(h).offsetTop;
+	    window.scrollTo(0, top);
+	};
 
     var answered = function (slct) {
         if (slct == [quests[0][temp].correct_answer]){
             myScore[0]++
         } else {
-            console.log("wrong");
-						wrong.play();
-        }
-        console.log(myScore)
+			wrong.play();
+        };
+        
 
         if (temp < quests[0].length -1){
             temp[0] ++;
             answers.length = 0;
             answers.push(quests[0][temp].correct_answer);
+
             for (var i = 0; i < quests[0][temp].incorrect_answers.length; i++) {
                 answers.push(quests[0][temp].incorrect_answers[i]);
-                };
-            console.log(quests[0][temp].question);
-            console.log(answers)
+            };
 
-
-                // if selected is correct
-                //      alert(Good Choice)
-                //      myScore ++
-                // else
-                //      alert(Dead Wrong!!!!)
-            }else {
-                console.log("That was the last question!");
-								jump('one');
-
-            }
-        }
+            answers.sort(function(a, b){return 0.5 - Math.random()});
+            
+        }else {
+			jump('one');
+            };
+        };
 
     var triviaObj = {
     	answered: answered,
     	getQuestions: getQuestions,
+        getQuestions2: getQuestions2,
     	myScore: myScore,
     	temp: temp,
     	quests: quests,
